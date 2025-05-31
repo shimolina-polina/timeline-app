@@ -4,6 +4,7 @@ import { Navigation } from "swiper/modules";
 import type { IEvent } from "../../interfaces/ITimeSegment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import gsap from "gsap";
+import ArrowSvg from '../../assets/Vector2.svg';
 
 const SliderContainer = styled.div`
 width: 100%;
@@ -18,6 +19,21 @@ order: 2;
     padding: 0 20px;
 }
 `;
+
+
+
+const ArrowSVG = ({ direction }: { direction: "left" | "right" }) => (
+    <svg
+      width="8"
+      height="12"
+      viewBox="0 0 8 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ transform: direction === "left" ? "rotate(180deg)" : "none" }}
+    >
+      <path d="M1 1L6 6L1 11" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
 
 const NavArrow = styled.button<{ direction: "left" | "right" }>`
 position: absolute;
@@ -127,22 +143,28 @@ useEffect(() => {
 
 const updateVisibility = () => {
     if (!containerRef.current || !slidesRef.current) return;
-    const container = containerRef.current;
-    const slides = slidesRef.current?.querySelectorAll('.swiper-slide') ?? [];
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const slides = slidesRef.current.querySelectorAll('.swiper-slide') ?? [];
     
-    const updatedVisibility: boolean[] = [];
+    const updatedVisibility: (boolean)[] = [];
     
-    const containerLeft = container.scrollLeft;
-    const containerRight = containerLeft + container.clientWidth;
+    slides.forEach((slide, index) => {
+        const rect = slide.getBoundingClientRect();
+
+        console.log({
+            index: index,
+            slideLeft: rect.left,
+            slideRight: rect.right,
+            containerLeft: containerRect.left,
+            containerRight: containerRect.right,
+            fullyVisible: rect.left >= containerRect.left && rect.right <= containerRect.right
+          });
+          
     
-    slides.forEach((slide) => {
-      const slideLeft = slide.offsetLeft;
-      const slideRight = slideLeft + slide.offsetWidth;
-    
-      const fullyVisible = slideLeft >= containerLeft && slideRight <= containerRight;
-      updatedVisibility.push(fullyVisible);
+        const fullyVisible = rect.left >= containerRect.left && rect.right <= containerRect.right;    
+        updatedVisibility.push(fullyVisible ? true : false);
     });
-        
+    
     setVisibleSlides(updatedVisibility as any);
     };
 
@@ -156,13 +178,13 @@ return (
     <SliderContainer ref={containerRef}>
     {!isBeginning && (
         <NavArrow direction="left" onClick={() => swiperRef.current?.slidePrev()}>
-        &#8249;
+            <ArrowSVG direction="left" />
         </NavArrow>
     )}
 
     {!isEnd && (
         <NavArrow direction="right" onClick={() => swiperRef.current?.slideNext()}>
-        &#8250;
+            <ArrowSVG direction="right" />
         </NavArrow>
     )}
 
