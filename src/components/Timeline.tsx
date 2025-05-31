@@ -88,10 +88,12 @@ const Year = styled.div<{side: "left" | "right";}>`
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    pointer-events: none;
 
     font-size: 200px;
     font-weight: bold;
     top: 50%;
+    z-index: 2;
     letter-spacing: -0.02em;
     transform: translateY(-50%);
     color: ${(props) => (props.side === "left" ? "#5D5FEF" : "#EF5DA8")};
@@ -127,7 +129,7 @@ const MainWrapper = styled.div`
     padding-bottom: 104px;
     &::before {
         content: '';
-        z-index: 1999;
+        z-index: 1;
         position: absolute;
         top: 0;
         left: 50%;
@@ -139,7 +141,7 @@ const MainWrapper = styled.div`
 
     &::after {
         content: '';
-        z-index: 1999;
+        z-index: 1;
         position: absolute;
         top: 467.4px;
         left: 0;
@@ -217,8 +219,8 @@ return (
 
             <CircleWrapper>
                 <Year side="left">{data.from}</Year>
-                <CircleWithDots count={totalPeriods} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} currentType={data.type}/>
                 <Year side="right">{data.to}</Year>
+                <CircleWithDots count={totalPeriods} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} currentType={data.type}/>
             </CircleWrapper>
             <Divider/>
             <SliderWrapper>

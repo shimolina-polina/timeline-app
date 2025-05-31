@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 
 const DotContainer = styled.div<{ angle: number; radius: number, isCircle: boolean }>`
   position: absolute;
-  z-index: 2000;
   top: 50%;
   left: 50%;
   transform: 
@@ -48,7 +47,7 @@ const DotCircle = styled.div<{isCircle: boolean; rotation: number;}>`
   background: #42567A;
   border-radius: 50%;
   transition: all 0.3s ease;
-  transform: rotate(${p => -p.rotation}deg) 
+  transform: rotate(${p => -p.rotation}deg);
 
   width: ${({ isCircle }) => isCircle ? '56px' : '100%'};
   height: ${({ isCircle }) => isCircle ? '56px' : '100%'};

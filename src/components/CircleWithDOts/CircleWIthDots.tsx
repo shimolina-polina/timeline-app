@@ -6,6 +6,7 @@ const Container = styled.div<{ radius: number; rotation: number }>`
     position: relative;
     width: ${p => p.radius * 2}px;
     height: ${p => p.radius * 2}px;
+    z-index: 3;
     border-radius: 50%;
     border: 1px solid rgba(66, 86, 122, 0.2);
     box-sizing: border-box;

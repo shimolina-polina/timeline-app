@@ -4,7 +4,6 @@ import { Navigation } from "swiper/modules";
 import type { IEvent } from "../../interfaces/ITimeSegment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import gsap from "gsap";
-import ArrowSvg from '../../assets/Vector2.svg';
 
 const SliderContainer = styled.div`
 width: 100%;
