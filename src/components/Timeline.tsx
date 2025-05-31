@@ -9,10 +9,33 @@ import type { Dispatch } from "react";
 
 const Wrapper = styled.div`
     background: #f4f5f9;
-    min-height: 100vh;
+    min-height: 298px;
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const TitleContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 170px;
+    @media (max-width: 320px) {
+        margin-top: 59px;
+    }
+    @media (max-width: 1160px) {
+        margin-top: 90px;
+    }
+`;
+
+
+const GradientLine = styled.div`
+    width: 5px;
+    height: 120px;
+    background: linear-gradient(to bottom, #3877ee, #ef5da8);
+    @media (max-width: 320px) {
+        display: none;
+    }
 `;
 
 const TitleWrapper = styled.div`
@@ -21,6 +44,10 @@ const TitleWrapper = styled.div`
     @media (max-width: 320px) {
         width: 123px;
         margin-left: 20px;
+    }
+
+    @media (max-width: 1160px) {
+        margin-left: 30px;
     }
 `;
 
@@ -72,24 +99,6 @@ const CircleWrapper = styled.div`
     }
 `;
 
-const GradientLine = styled.div`
-    width: 5px;
-    height: 120px;
-    background: linear-gradient(to bottom, #3877ee, #ef5da8);
-    @media (max-width: 320px) {
-        display: none;
-    }
-`;
-
-const TitleContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 170px;
-    @media (max-width: 320px) {
-        margin-top: 59px;
-    }
-`;
 
 
 const MainWrapper = styled.div`
@@ -125,19 +134,22 @@ const MainWrapper = styled.div`
         background: rgba(66, 86, 122, 0.2);
     }
 
-    @media (max-width: 320px) {
-        padding-bottom: 0;
-        border: none;
-        width: 100%;
-        overflow: hidden;
-        align-items: flex-start;
+    @media (max-width: 1160px) {
         &::before {
             display: none;
         }
         &::after {
             display: none;
         }
+        border: none;
+    }
 
+    @media (max-width: 320px) {
+        padding-bottom: 0;
+        border: none;
+        width: 100%;
+        overflow: hidden;
+        align-items: flex-start;
     }
 `
 

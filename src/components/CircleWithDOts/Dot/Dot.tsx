@@ -34,7 +34,7 @@ const DotContainer = styled.div<{ angle: number; radius: number, isCircle: boole
   }
 
 
-  @media (max-width: 1330px) {
+  @media (max-width: 1160px) {
     display: none;
   }
 `;
