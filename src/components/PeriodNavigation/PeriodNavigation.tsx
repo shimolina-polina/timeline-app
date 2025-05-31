@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import ArrowSvg from '../../assets/Vector2.svg?react';
+import ArrowSvg from '../../assets/Vector2.svg';
 import PeriodDotsNavigation from "./PeriodDotsNavigation/PeriodDotsNavigation";
 
 const Arrow = styled(ArrowSvg)<{ direction?: "left" | "right" }>`
@@ -16,7 +16,7 @@ const PeriodNavigationWrapper = styled.div`
     width: calc(100% - 70px);
     order: 1;
 
-    @media (max-width: 320px) {
+    @media (max-width: 550px) {
       order: 2;
     }
 `
@@ -28,7 +28,7 @@ const PeriodNavigation = styled.div`
   flex-direction: column;
   align-items: left;
   gap: 20px;
-  @media (max-width: 320px) {
+  @media (max-width: 550px) {
       margin-left: 20px;
       gap: 10.67px;
     }

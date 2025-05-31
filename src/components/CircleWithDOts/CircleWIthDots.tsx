@@ -12,12 +12,18 @@ const Container = styled.div<{ radius: number; rotation: number }>`
     transform: rotate(${p => p.rotation}deg);
     transition: transform 0.8s cubic-bezier(0.3, 0.7, 0.2, 1);
 
+
     @media (max-width: 1160px) {
         border: none;
         width: 0;
-        transform: rotate(0deg)
-        //height: 72px;
+        transform: rotate(0deg);
+        height: 130px
     }
+    
+    @media (max-width: 550px) {
+        height: 80px
+    }
+
 `;
 
 

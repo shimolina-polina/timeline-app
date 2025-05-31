@@ -14,7 +14,7 @@ padding: 0 95px;
 box-sizing: border-box;
 order: 2;
 
-@media (max-width: 320px) {
+@media (max-width: 550px) {
     order: 1;
     padding: 0 20px;
 }
@@ -58,7 +58,7 @@ box-shadow: 0 0 15px rgba(56, 119, 238, 0.1);
     background: #f0f0f0;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 550px) {
     display: none;
 }
 ;`
@@ -66,7 +66,7 @@ box-shadow: 0 0 15px rgba(56, 119, 238, 0.1);
 const StyledSwiper = styled(Swiper)`
 width: 100%;
 box-sizing: border-box;
-@media (max-width: 320px) {
+@media (max-width: 550px) {
     min-height: 120px;
 }
 ;
@@ -74,11 +74,19 @@ box-sizing: border-box;
 const Event = styled.div.withConfig({
 shouldForwardProp: (prop) => prop !== "visible",
 })<{ visible?: boolean }>`
-width: 350px;
+width: 300px;
 opacity: ${(props) => (props.visible? 1 : 0.3)};
 transition: opacity 0.3s ease;
 
-@media (max-width: 320px) {
+@media (max-width: 1340px) {
+    width: 250px;
+}
+
+@media (max-width: 1020px) {
+    width: 230px;
+}
+
+@media (max-width: 550px) {
     width: 166px;
 }
 `;
@@ -88,7 +96,7 @@ font-family: 'Bebas Neue', sans-serif;
 color: #3877ee;
 font-size: 25px;
 font-weight: 400;
-@media (max-width: 320px) {
+@media (max-width: 550px) {
     font-size: 16px;
 }
 ;`
@@ -98,13 +106,13 @@ font-weight: 400;
 font-size: 20px;
 margin-top: 15px;
 color: #42567a;
-@media (max-width: 320px) {
+@media (max-width: 550px) {
     font-size: 14px;
 }
 ;`
 
 const StyledSwiperSlide = styled(SwiperSlide)`
-@media (max-width: 320px) {
+@media (max-width: 550px) {
     width: 166px !important;
     flex-shrink: 0 !important;
 }
@@ -191,13 +199,13 @@ return (
     <div ref={slidesRef}>
         <StyledSwiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            onSlideChange={(swiper) => {
+            onTransitionEnd={() => {
+                const swiper = swiperRef.current;
+                if (!swiper) return;
+
                 setIsBeginning(swiper.isBeginning);
                 setIsEnd(swiper.isEnd);
-
-                setTimeout(() => {
-                    updateVisibility();
-                }, 100);
+                updateVisibility();
             }}
             modules={[Navigation]}
             slidesPerView={3}
@@ -213,10 +221,20 @@ return (
                 spaceBetween: 25,
                 slidesPerGroup: 1,
                 },
-                320: {
-                slidesPerView: 3,
-                spaceBetween: 80,
+                620: {
+                slidesPerView: 2,
+                spaceBetween: 50,
                 slidesPerGroup: 3,
+                },
+                840: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+                slidesPerGroup: 3,
+                },
+                1160: {
+                    slidesPerView: 3,
+                    spaceBetween: 80,
+                    slidesPerGroup: 3,
                 }
             }}
         >
