@@ -9,7 +9,7 @@ React + TypeScript проект с использованием Webpack для �
 ### 1. Клонируйте репозиторий
 
 ```bash
-git clone https://github.com/your-username/timeline-app.git
+git clone https://github.com/shimolina-polina/timeline-app.git
 cd timeline-app
 ```
 
