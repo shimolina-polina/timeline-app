@@ -8,73 +8,87 @@ import PeriodNavigationSlider from "./PeriodNavigation/PeriodNavigation";
 import type { Dispatch } from "react";
 
 const Wrapper = styled.div`
-  background: #f4f5f9;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background: #f4f5f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const TitleWrapper = styled.div`
-  width: 353px;
-  margin-left: 70px;
+    width: 353px;
+    margin-left: 70px;
+    @media (max-width: 320px) {
+        width: 123px;
+        margin-left: 20px;
+    }
 `;
 
 const Title = styled.h1`
-  font-size: 56px;
-  font-weight: bold;
-  color: #42567a;
+    font-size: 56px;
+    font-weight: bold;
+    color: #42567a;
+    @media (max-width: 320px) {
+        font-size: 20px;
+    }
 `;
 
 interface YearProps {
-  side: "left" | "right";
+    side: "left" | "right";
 }
 
 const Year = styled.div<YearProps>`
-  position: absolute;
+    position: absolute;
     user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 
-  font-size: 200px;
-  font-weight: bold;
-  top: 50%;
-  letter-spacing: -0.02em;
-  transform: translateY(-50%);
-  color: ${(props) => (props.side === "left" ? "#5D5FEF" : "#EF5DA8")};
-  ${(props) => (props.side === "left" ? "left: -15px;" : "right: 15px;")}
-  @media (max-width: 1160px) {
-    font-size: 150px;
-    ${(props) => (props.side === "left" ? "left: 95px;" : "right: 125px;")}
-  }
+    font-size: 200px;
+    font-weight: bold;
+    top: 50%;
+    letter-spacing: -0.02em;
+    transform: translateY(-50%);
+    color: ${(props) => (props.side === "left" ? "#5D5FEF" : "#EF5DA8")};
+    ${(props) => (props.side === "left" ? "left: -15px;" : "right: 15px;")}
+    @media (max-width: 320px) {
+        font-size: 56px;
+        ${(props) => (props.side === "left" ? "left: 20px;" : "right: 20px;")}
+        ${(props) => (props.side === "left" ? "color: #3877EE" : "color: F178B6")};
+        top: 20px;
+    }
 `;
 
 const CircleWrapper = styled.div`
-  width: 973px;
-  position: relative;
-  display: flex;
-  margin-top: -105px;
-  justify-content: center;
-  align-items: center;
-  @media (max-width: 1330px) {
-    width: 900px;
-  }
+    width: 973px;
+    position: relative;
+    display: flex;
+    margin-top: -105px;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 320px) {
+        width: 100%;
+        margin-top: 56px;
+    }
 `;
 
 const GradientLine = styled.div`
-  width: 5px;
-  height: 120px;
-  background: linear-gradient(to bottom, #3877ee, #ef5da8);
-  @media (max-width: 1330px) {
-    display: none;
-  }
+    width: 5px;
+    height: 120px;
+    background: linear-gradient(to bottom, #3877ee, #ef5da8);
+    @media (max-width: 320px) {
+        display: none;
+    }
 `;
 
 const TitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 170px;
+    @media (max-width: 320px) {
+        margin-top: 59px;
+    }
 `;
 
 
@@ -111,16 +125,33 @@ const MainWrapper = styled.div`
         background: rgba(66, 86, 122, 0.2);
     }
 
-    @media (max-width: 1330px) {
+    @media (max-width: 320px) {
+        padding-bottom: 0;
         border: none;
-        width: 100vw;
+        width: 100%;
+        overflow: hidden;
+        align-items: flex-start;
         &::before {
             display: none;
         }
         &::after {
             display: none;
         }
+
     }
+`
+
+const Divider = styled.div`
+display: none;
+@media(max-width: 320px){
+display: block;
+    margin-left: 20px;
+    margin-top: 58px;
+    margin-right: 20px;
+    width: calc(100% - 40px);
+    height: 1px;
+    background-color: #C7CDD9;
+}
 `
 
 interface ITimelineProps {
@@ -132,31 +163,43 @@ interface ITimelineProps {
     onNextPeriod: () => void;
 }  
 
+const SliderWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  @media(max-width: 320px) {
+    align-items: flex-start;
+  }
+`;
+
 
 export default function Timeline({ data, currentIndex, setCurrentIndex, totalPeriods, onPrevPeriod, onNextPeriod }: ITimelineProps) {
 
-  return (
+return (
     <Wrapper>
-      <MainWrapper>
-        <div style={{ width: "100%", marginTop: "170px" }}>
-          <TitleContainer>
-            <GradientLine />
-            <TitleWrapper>
-              <Title>Исторические даты</Title>
-            </TitleWrapper>
-          </TitleContainer>
-        </div>
+        <MainWrapper>
+            <div style={{ width: "100%" }}>
+                <TitleContainer>
+                    <GradientLine />
+                    <TitleWrapper>
+                        <Title>Исторические даты</Title>
+                    </TitleWrapper>
+                </TitleContainer>
+            </div>
 
-        <CircleWrapper>
-          <Year side="left">{data.from}</Year>
-          <CircleWithDots count={totalPeriods} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} currentType={data.type}/>
-          <Year side="right">{data.to}</Year>
-        </CircleWrapper>
-
-        <PeriodNavigationSlider currentIndex={currentIndex} totalPeriods={totalPeriods} onPrevPeriod={onPrevPeriod} onNextPeriod={onNextPeriod} />
-        
-        <ContentSlider events={data.events}/>
-      </MainWrapper>
+            <CircleWrapper>
+                <Year side="left">{data.from}</Year>
+                <CircleWithDots count={totalPeriods} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} currentType={data.type}/>
+                <Year side="right">{data.to}</Year>
+            </CircleWrapper>
+            <Divider/>
+            <SliderWrapper>
+                <PeriodNavigationSlider currentIndex={currentIndex} totalPeriods={totalPeriods} onPrevPeriod={onPrevPeriod} onNextPeriod={onNextPeriod} />
+            
+                <ContentSlider events={data.events}/>
+            </SliderWrapper>
+        </MainWrapper>
     </Wrapper>
-  );
+);
 }

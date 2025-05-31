@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import ArrowSvg from '../../assets/Vector2.svg?react';
+import PeriodDotsNavigation from "./PeriodDotsNavigation/PeriodDotsNavigation";
 
 const Arrow = styled(ArrowSvg)<{ direction?: "left" | "right" }>`
   width: 6.25px;
@@ -13,6 +14,11 @@ const Arrow = styled(ArrowSvg)<{ direction?: "left" | "right" }>`
 
 const PeriodNavigationWrapper = styled.div`
     width: calc(100% - 70px);
+    order: 1;
+
+    @media (max-width: 320px) {
+      order: 2;
+    }
 `
 
 const PeriodNavigation = styled.div`
@@ -22,6 +28,10 @@ const PeriodNavigation = styled.div`
   flex-direction: column;
   align-items: left;
   gap: 20px;
+  @media (max-width: 320px) {
+      margin-left: 20px;
+      gap: 10.67px;
+    }
 `;
 
 const PeriodText = styled.div`
@@ -32,6 +42,10 @@ const PeriodText = styled.div`
 const PeriodButtons = styled.div`
   display: flex;
   gap: 20px;
+  @media(max-width: 320px) {
+    gap: 8.3px;
+
+  }
 `;
 
 const PeriodButton = styled.button`
@@ -50,6 +64,11 @@ const PeriodButton = styled.button`
     opacity: 0.3;
     cursor: default;
   }
+  @media(max-width: 320px) {
+    width: 25px;
+    height: 25px;
+
+  }
 `;
 
 interface IPeriodNavigation {
@@ -62,6 +81,7 @@ interface IPeriodNavigation {
 
 const PeriodNavigationSlider = ({ currentIndex, totalPeriods, onPrevPeriod, onNextPeriod }: IPeriodNavigation) => {
     return (
+      <>
         <PeriodNavigationWrapper>
             <PeriodNavigation>
                 <PeriodText>
@@ -74,9 +94,14 @@ const PeriodNavigationSlider = ({ currentIndex, totalPeriods, onPrevPeriod, onNe
                     <PeriodButton onClick={onNextPeriod} disabled={currentIndex === totalPeriods - 1}>
                         <Arrow direction="left" />
                     </PeriodButton>
+                    
                 </PeriodButtons>
+                
             </PeriodNavigation>
+            
         </PeriodNavigationWrapper>
+        <PeriodDotsNavigation currentIndex={currentIndex} totalPeriods={totalPeriods} />
+        </>
     )
 }
 
